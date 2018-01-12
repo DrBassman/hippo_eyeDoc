@@ -1,0 +1,124 @@
+0.5.5 - 2013/08/06
+  * Add license to gemspec.
+  * Add .to_pretty_string method to allow pretty printing.
+  * Setup #pretty_print method on TransactionSet and RepeatingComponent to
+	allow pp to work properly.
+0.5.4 - 2013/08/06
+	* Handle whitespace prefixed segment identifiers. This allows you to parse a
+	file that has been output with indentation (to signify loops/segments).
+0.5.3 - 2013/02/27
+	* Fix issue with repeating whitespace inside a field. (resolves #2)
+0.5.2 - 2013/01/02
+	* Only define Hippo::VERSION if it isn't already defined (prevents an 
+		already initialized constant error).
+0.5.0 - 2012/12/13
+  * Allow parsing of HIPAA_837::L2000B to properly handle the 'floating' L2300
+    loop.
+  * Make segment/loop inclusion conditional (when :parent_context_conditions
+                                             is used)
+  * Refactor TransactionSets::Base.grouped_components.
+  * Properly handle the removal of empty fields.
+0.4.1 - 2012/09/14
+  * Fix major issue (stupid typo) with Date parsing.
+0.4.0 - 2012/09/13
+  * Do not hard-code separators in Hippo::Segments::Base#to_s.
+  * Properly escape regexps involving separators.
+  * Discard any empty segments when parsing transaction sets.
+  * Remove whitespace from fields containing only whitespace.
+0.3.0
+  * Add support for 270/271 transaction sets.
+0.2.3
+  * Fix issue preventing parsing when segments are not in the correct order. Now
+    we loop through all segments within a given section to make sure we grab them
+    all.
+  * Add shortcut methods to Segment::Base, TransactionSet::Base, and Component
+    to allow easier identification of segments? vs transaction_sets?.
+  * Fix issue causing all :decimal fields to be initialized to 0 even when not
+    required.
+0.2.2 - 2012/01/25
+  * Fix issue with segment parsing.  Make sure to set each segments parent
+    properly once we identify that it belongs in the particular transaction
+    set.  (This allows traversing via segment.parent.parent.)
+  * Add ancestors method to TransactionSet::Base,TransactionSet::RepeatingComponent,
+    and Segments::Base which returns an array containing each ancestor (parent)
+    from the current segment to the outermost containing element.
+  * Fix issue causing non-required fields to be blank filled.
+  * Refactor Field#string_value and Field#formatted_value to handle more situations.
+  * Add segments method to TransactionSet::Base,TransactionSet::RepeatingComponent,
+    and Segments::Base which returns a flattened array of segments within each
+    container.  (Segment::Base simply returns [self].)
+  * Refactor TransactionSet::Base#segment_count to use new segments array.
+  * Add shortcut methods to Hippo::Parser for parse_file and parse_string.  Now they
+    can be called without creating an instance of Parser. (i.e Hippo::Parser.parse_string(s))
+  * Fix issue causing access to empty composite fields to throw an error ([] for NilClass).
+0.2.1 - 2012/01/21
+  * Fix issue preventing fixed width segments from printing
+    properly. (Non set fields on ISA were empty not padded.)
+0.2.0 - 2012/01/21
+  * Updated segment definitions to differentiate between
+    Integer and Decimal.
+  * Add field level datatype conversion. Date, Time, Integer,
+    and Decimal fields will be stored internally as their
+    appropriate type and converted to a properly formatted
+    string representation when needed.
+0.1.2 - 2012/01/18
+  * Add RepeatingComponent to Outputters.
+  * Add HIPAA_997 to list of supported transaction sets.
+0.1.1 - 2012/01/11
+  * Update Parser to better handle Loops and repeating components.
+  * Flesh out to_html outputter with a basic layout.
+0.1.0 - 2012/01/05
+  * Add concept of Outputters.
+  * Create PDF and HTML outputters.
+  * Create PaperClaim outputter for HIPAA_837::L2000A.
+  * Refactor parsing so any descendant of TransactionSet::Base is
+    able to parse a string representation of itself.
+  * Refactor Separator module to use super instead of a custom
+    function call to initialize the separators.
+  * Fix project so that we do not modify $LOAD_PATH.
+  * Only use autoload for Segments and TransactionSets that are optional.
+0.0.12 - 2011/12/22
+  * Fix a number of parsing errors.
+    * Ensure that we only evaluate the first segment when matching
+      against non-loop components.
+    * Fix issue causing sub-loops to be reversed on parsing.
+    * Fix issue preventing proper recursion when parsing a repeating
+      component inside TransactionSet::Base.
+0.0.11 - 2011/12/18
+  * Ignore Base Control Set when parsing input files.
+  * Make sure to only append a segment when we are within a transaction.
+  * Added TA1 segment.
+  * Add ISA, GS, GE, and IEA to TransactionSets::Base, and populate them
+    when parsing.  This allows the client application to access each
+    transaction sets individual envelope.
+  * Added common code lists including:
+    - Claim Adjustment Reason Codes
+    - Claim Status Category Codes
+    - Claim Status Codes
+    - Remittance Advice Remark Codes
+    - Service Type Codes
+    - Taxonomy Codes
+  * Fix issue preventing repeating loops from being parsed properly.
+  * Allow accessing composite fields via shorthand notation. (e.g
+    SV101_01 = SV1.ProductServiceIdQualifier)
+0.0.10 - 2011/11/29
+  * Fix autoload issue with enveloping structures.
+0.0.9 - 2011/11/29
+  * Update Enveloping structures for 5010.
+0.0.8 - 2011/11/15
+  * Add ability to use Regexp with TransactionSet::Base#find_by_name.
+0.0.7 - 2011/11/15
+  * Add TransactionSet::Base#find_by_name to allow searching for components
+    by name rather than only by identifier.
+0.0.6 - 2011/11/09
+  * Add Separator module for handling segment, field, composite, and
+    repetition separators the same.
+  * Respect 'parent's separators when building/initializing components.
+  * Fixed parsing logic to properly handle nested groups.
+0.0.5 - 2011/09/16
+  * Add ability to parse transaction sets.
+0.0.4
+  * Fix issue when no values are set in any subfield of a composite field.
+  * Add more segment tests.
+  * Import all segments and loops from the X12 CSV Table Data
+  * Initial version.
