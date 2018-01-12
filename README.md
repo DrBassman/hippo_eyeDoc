@@ -26,6 +26,25 @@ Sample scripts using Hippo:
 
 * [277CA Parser](https://gist.github.com/1492492)
 
+This Repository
+---------------
+
+I was needing to parse the so-called '999' and '277' files that the vendor to whom I submit electronic
+medical claims provides for each file uploaded.  A google search led me to the hippo ruby gem.  When my claims processor
+changed the segment_separator in the 999 & 277's that they provide, my script quit working.  I discovered that the '~'
+character was HARD-CODED as the segment_separator.  I copied the repository to github so that I could
+"forget" which file it was that I updated, and to contribute the fix back to whomever would find it
+useful.
+
+I have attempted to email a patch to the author, but many of the links for this gem on
+http://rubygems.org/gems/hippo (particularly the links to github source) are broken.  To date, I have not received any 
+response from the author linked from that page...
+
+This repository also includes my scripts for parsing the 999 & 277 files that I use in my practice...
+
+Ryan Losh, O.D.
+01/11/2018 @ 11:03PM CST.
+
 Installation
 ------------
     gem install hippo
