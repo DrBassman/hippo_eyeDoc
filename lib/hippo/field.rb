@@ -55,7 +55,7 @@ module Hippo
     end
 
     def generate_decimal(value)
-      value ||= BigDecimal.new('0')
+      value ||= BigDecimal('0')
 
       value.to_s('F').sub(/\.0\z/,'').rjust(minimum, '0')
     end
@@ -66,7 +66,7 @@ module Hippo
         return nil
       end
 
-      BigDecimal.new(value.to_s)
+      BigDecimal(value.to_s)
     end
 
     def generate_time(value)
