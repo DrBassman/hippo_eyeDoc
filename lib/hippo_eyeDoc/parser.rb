@@ -3,7 +3,7 @@ require_relative 'parser/transaction_set'
 
 module Hippo_eyeDoc
   class Parser
-    include Hippo_eyeDoc_eyeDoc::Separator
+    include Hippo_eyeDoc::Separator
     include TransactionSet
 
     def self.parse_file(input)

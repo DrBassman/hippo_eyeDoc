@@ -11,15 +11,15 @@ def wrap_text(text, max_width, wrap_string = "\n")
   end
 end
 
-category_codes = Hippo::CodeLists::ClaimStatusCategoryCodes
-status_codes   = Hippo::CodeLists::ClaimStatusCodes
+category_codes = Hippo_eyeDoc::CodeLists::ClaimStatusCategoryCodes
+status_codes   = Hippo_eyeDoc::CodeLists::ClaimStatusCodes
 
 ARGF.each do |infile|
   ftaq = 0
   ftaa = 0
   ftrq = 0
   ftra = 0
-  parser = Hippo::Parser.new
+  parser = Hippo_eyeDoc::Parser.new
   transaction_sets = parser.parse_string(infile)
 
   transaction_sets.each do |ts|

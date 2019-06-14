@@ -1,4 +1,4 @@
-module Hippo_eyeDoc_eyeDoc
+module Hippo_eyeDoc
   class Parser
     module Segment
       def parse(input)
