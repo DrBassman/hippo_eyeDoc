@@ -44,7 +44,7 @@ def seg_syntax_code_lookup(code)
 end
 
 ARGF.each do |infile|
-  parser = Hippo::Parser.new
+  parser = Hippo_eyeDoc::Parser.new
 
   trans_sets = parser.parse_string(infile)
 
