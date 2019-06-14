@@ -1,3 +1,7 @@
+hippo_eyeDoc 0.0.1 - 2019/06/14 (RKL)
+  * Rename gem to hippo_eyeDoc (so this version could be uploaded to rubygems.org).
+  * fix bug where segment_separater was hard-coded to ~ (in segments/base.rb line 157).
+  * fix bug where syntax was deprecated when creating new object.
 0.5.5 - 2013/08/06
   * Add license to gemspec.
   * Add .to_pretty_string method to allow pretty printing.
