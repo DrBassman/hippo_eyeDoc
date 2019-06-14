@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require 'pp'
-require 'pry'
+#require 'pry'
 require 'hippo_eyeDoc'
 
 def wrap_text(text, max_width, wrap_string = "\n")
