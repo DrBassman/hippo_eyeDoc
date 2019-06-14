@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require 'pp'
 require 'pry'
-require 'hippo'
+require 'hippo_eyeDoc'
 
 def wrap_text(text, max_width, wrap_string = "\n")
   if text.length <= max_width

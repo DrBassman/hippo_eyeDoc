@@ -2,7 +2,7 @@ require File.expand_path('test_helper', File.dirname(__FILE__))
 
 class TestParser < MiniTest::Unit::TestCase
   def setup
-    @parser = Hippo::Parser.new
+    @parser = Hippo_eyeDoc::Parser.new
   end
 
   def test_parse_returns_array_of_transaction_sets
@@ -11,12 +11,12 @@ class TestParser < MiniTest::Unit::TestCase
     assert_instance_of Array, transaction_sets
 
     transaction_sets.each do |ts|
-      assert_kind_of Hippo::TransactionSets::Base, ts
+      assert_kind_of Hippo_eyeDoc::TransactionSets::Base, ts
     end
   end
 
   def test_raises_error_on_extra_segments
-    ts = Hippo::TransactionSets::Test::Base.new
+    ts = Hippo_eyeDoc::TransactionSets::Test::Base.new
     ts.ST
     ts.TSS.Field2 = 'Bar'
     ts.TSS.Field3 = 'Baz'
@@ -48,7 +48,7 @@ class TestParser < MiniTest::Unit::TestCase
     assert_equal ':', @parser.composite_separator
     assert_equal '~', @parser.segment_separator
 
-    @parser = Hippo::Parser.new
+    @parser = Hippo_eyeDoc::Parser.new
     transaction_set = @parser.parse_file('samples/005010X231A1_02.edi')
 
     assert_equal '!', @parser.field_separator
@@ -67,7 +67,7 @@ class TestParser < MiniTest::Unit::TestCase
   end
 
   def test_parses_repeating_loops
-    ts = Hippo::TransactionSets::Test::Base.new
+    ts = Hippo_eyeDoc::TransactionSets::Test::Base.new
     ts.ST
     [1,2,3,4,5].each do |i|
       ts.TSS.build do |tss|
@@ -85,14 +85,14 @@ class TestParser < MiniTest::Unit::TestCase
   end
 
   def test_parses_partial_transaction_set
-    ts_01 = Hippo::TransactionSets::Test::Base.new
+    ts_01 = Hippo_eyeDoc::TransactionSets::Test::Base.new
     ts_01.L0002 do |l0002|
       l0002.TCS.Field2 = 'SubBarBlah'
       l0002.TSS.Field2 = 'SubBarRepeater'
     end
 
     # TCS*:SubBarBlah**Foo2~TSS*Last Segment*SubBarRepeater~
-    ts_02 = Hippo::TransactionSets::Test::L0002.new
+    ts_02 = Hippo_eyeDoc::TransactionSets::Test::L0002.new
     ts_02.parse(ts_01.to_s)
 
     assert_equal ts_01.L0002.values.to_s, ts_02.values.to_s
@@ -101,7 +101,7 @@ class TestParser < MiniTest::Unit::TestCase
   def test_parse_l2000a
     files = ['samples/837_L2000A_01.edi', 'samples/837_L2000A_02.edi']
     files.each do |f|
-      l2000a = Hippo::TransactionSets::HIPAA_837::L2000A.new.parse(File.read(f))
+      l2000a = Hippo_eyeDoc::TransactionSets::HIPAA_837::L2000A.new.parse(File.read(f))
 
       # when L2000B HL04 is '0' we must have a L2000C child
       if l2000a.L2000B.HL.HL04 == '0'
@@ -114,14 +114,14 @@ class TestParser < MiniTest::Unit::TestCase
 
   def test_same_child_exists_in_multiple_levels
     no_child_loop_string = "TSS*HAS NO CHILD LOOP~TSS*Multiple Parents~"
-    ts                   = Hippo::TransactionSets::Test::L0004.new
+    ts                   = Hippo_eyeDoc::TransactionSets::Test::L0004.new
 
     ts.parse(no_child_loop_string)
     assert_equal 'TSS*Multiple Parents~', ts.values[1].TSS.to_s
 
 
     child_loop_string = "TSS*HAS CHILD LOOP~TSS*Multiple Parents~"
-    ts                   = Hippo::TransactionSets::Test::L0004.new
+    ts                   = Hippo_eyeDoc::TransactionSets::Test::L0004.new
 
     ts.parse(child_loop_string)
     assert_equal 'TSS*Multiple Parents~', ts.values[2].to_s
@@ -129,7 +129,7 @@ class TestParser < MiniTest::Unit::TestCase
 
   def test_strips_leading_whitespace_from_segment_identifier
     initial_string = "    ST*Test~\n      TSS*Blah*BOOM~"
-    ts             = Hippo::TransactionSets::Test::Base.new
+    ts             = Hippo_eyeDoc::TransactionSets::Test::Base.new
 
     ts.parse(initial_string)
 

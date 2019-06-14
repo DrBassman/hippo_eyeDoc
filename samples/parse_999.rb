@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 require 'pp'
 require 'pry'
-require 'hippo'
+require 'hippo_eyeDoc'
 
 #
 # This will parse an ANSI X12 999B file and

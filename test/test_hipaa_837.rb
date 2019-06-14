@@ -64,7 +64,7 @@ VAN claim identification number = 17312345600006351.
 
 =end
 
-    ts = Hippo::TransactionSets::HIPAA_837::Base.new
+    ts = Hippo_eyeDoc::TransactionSets::HIPAA_837::Base.new
 
     ts.ST do |st|
       st.TransactionSetControlNumber        = '0021'
@@ -394,7 +394,7 @@ TOTAL CHARGES: $827.00
 ELECTRONIC ROUTE: Billing Provider (sender) to ABC PAYER direct
 =end
 
-    ts = Hippo::TransactionSets::HIPAA_837::Base.new
+    ts = Hippo_eyeDoc::TransactionSets::HIPAA_837::Base.new
 
     ts.ST.TransactionSetControlNumber        = '0001'
     ts.ST.ImplementationConventionReference  = '005010X222A1'

@@ -1,3 +1,8 @@
+Hippo_eyeDoc
+============
+Fork of Hippo with bugfixes by DrBassman.  Forked so that a "fixed" ruby gem could be
+created / uploaded to rubygems.org.
+
 Hippo
 =====
 

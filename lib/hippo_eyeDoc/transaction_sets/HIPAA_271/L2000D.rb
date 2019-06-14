@@ -1,0 +1,41 @@
+module Hippo_eyeDoc::TransactionSets
+  module HIPAA_271
+
+    class L2000D < Hippo_eyeDoc::TransactionSets::Base
+      loop_name 'L2000D'    #Dependent Level
+
+      #Dependent Level
+      segment Hippo_eyeDoc::Segments::HL,
+                :name           => 'Dependent Level',
+                :minimum        => 0,
+                :maximum        => 1,
+                :position       => 100,
+                :identified_by => {
+                  'HL03' => '23',
+                  'HL04' => '0'
+                }
+
+      #Dependent Trace Number
+      segment Hippo_eyeDoc::Segments::TRN,
+                :name           => 'Dependent Trace Number',
+                :minimum        => 0,
+                :maximum        => 3,
+                :position       => 200,
+                :identified_by => {
+                  'TRN01' => ["1", "2"]
+                }
+
+      #Dependent Name
+      loop    Hippo_eyeDoc::TransactionSets::HIPAA_271::L2100D,
+                :name           => 'Dependent Name',
+                :minimum        => 1,
+                :maximum        => 1,
+                :position       => 300,
+                :identified_by => {
+                  'NM1.NM101' => '03',
+                  'NM1.NM102' => '1'
+                }
+
+    end
+  end
+end

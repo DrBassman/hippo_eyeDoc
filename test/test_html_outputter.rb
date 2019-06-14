@@ -2,7 +2,7 @@ require File.expand_path('test_helper', File.dirname(__FILE__))
 
 class TestHTMLOutputter < MiniTest::Unit::TestCase
   def setup
-    @parser = Hippo::Parser.new
+    @parser = Hippo_eyeDoc::Parser.new
     @sample_835 = @parser.parse_file('samples/005010X221A1_business_scenario_1.edi').first
     @sample_837 = @parser.parse_file('samples/005010X231A1_01.edi').first
   end

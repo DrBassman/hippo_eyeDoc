@@ -37,7 +37,7 @@ The following assumptions pertain to scenario one:
 
 =end
 
-    ts = Hippo::TransactionSets::HIPAA_835::Base.new
+    ts = Hippo_eyeDoc::TransactionSets::HIPAA_835::Base.new
 
     ts.ST do |st|
       st.TransactionSetControlNumber        = '1234'
